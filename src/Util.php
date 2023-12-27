@@ -6,7 +6,7 @@ class Util
     /**
      * @return bool
      */
-    protected static function isCoroutine(): bool
+    public static function isCoroutine(): bool
     {
         if (!class_exists(\Swoole\Coroutine::class)) {
             return false;
