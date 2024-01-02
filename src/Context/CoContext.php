@@ -2,31 +2,35 @@
 
 namespace Haoa\Util\Context;
 
+use Swoole\Coroutine;
+
 class CoContext extends BaseContext
 {
 
+    const KEY_CONTEXT = '_context';
+
     public function get($key)
     {
-        return \Swoole\Coroutine::getContext()['context'][$key] ?? null;
+        return Coroutine::getContext()[self::KEY_CONTEXT][$key] ?? null;
     }
 
     public function has($key)
     {
-        return isset(\Swoole\Coroutine::getContext()['context'][$key]);
+        return isset(Coroutine::getContext()[self::KEY_CONTEXT][$key]);
     }
 
     public function set($key, $value)
     {
-        \Swoole\Coroutine::getContext()['context'][$key] = $value;
+        Coroutine::getContext()[self::KEY_CONTEXT][$key] = $value;
     }
 
     public function delete($key)
     {
-        unset(\Swoole\Coroutine::getContext()['context'][$key]);
+        unset(Coroutine::getContext()[self::KEY_CONTEXT][$key]);
     }
 
     public function clear()
     {
-        unset(\Swoole\Coroutine::getContext()['context']);
+        unset(Coroutine::getContext()[self::KEY_CONTEXT]);
     }
 }
