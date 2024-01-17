@@ -55,4 +55,9 @@ class ArrContext extends BaseContext
         unset(self::$context[$key]);
     }
 
+    public function clear()
+    {
+        self::$context = [];
+    }
+
 }

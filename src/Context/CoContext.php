@@ -41,4 +41,9 @@ class CoContext extends BaseContext
         unset(Coroutine::getContext()[self::KEY_CONTEXT][$key]);
     }
 
+    public function clear()
+    {
+        unset(Coroutine::getContext()[self::KEY_CONTEXT]);
+    }
+
 }

@@ -55,6 +55,7 @@ class RunContext
     {
         $cid = self::getCid();
         if (isset(self::$container[$cid])) {
+            self::$container[$cid]->clear();
             unset(self::$container[$cid]);
         }
     }

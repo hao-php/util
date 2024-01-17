@@ -12,6 +12,8 @@ abstract class BaseContext
 
     abstract public function delete($key);
 
+    abstract public function clear();
+
     public function mustGet($key)
     {
         if (!$this->has($key)) {
