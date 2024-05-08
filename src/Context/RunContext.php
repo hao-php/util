@@ -12,7 +12,7 @@ class RunContext
         return \Swoole\Coroutine::getCid();
     }
 
-    private static function getHandler(): BaseContext
+    public static function getHandler(): BaseContext
     {
         $cid = self::getCid();
         if (!isset(self::$container[$cid])) {
