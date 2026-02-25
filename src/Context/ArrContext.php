@@ -17,7 +17,7 @@ class ArrContext extends BaseContext
     public function get($key)
     {
         if (empty($key)) {
-            return new \RuntimeException("key [{$key}] cannot be empty");
+            throw new \InvalidArgumentException("key cannot be empty");
         }
         return self::$context[$key] ?? null;
     }
@@ -30,7 +30,7 @@ class ArrContext extends BaseContext
     public function set($key, $value)
     {
         if (empty($key)) {
-            return new \RuntimeException("key [{$key}] cannot be empty");
+            throw new \InvalidArgumentException("key cannot be empty");
         }
         self::$context[$key] = $value;
     }
@@ -42,7 +42,7 @@ class ArrContext extends BaseContext
     public function has($key)
     {
         if (empty($key)) {
-            return new \RuntimeException("key [{$key}] cannot be empty");
+            throw new \InvalidArgumentException("key cannot be empty");
         }
         return isset(self::$context[$key]);
     }
@@ -50,7 +50,7 @@ class ArrContext extends BaseContext
     public function delete($key)
     {
         if (empty($key)) {
-            return new \RuntimeException("key [{$key}] cannot be empty");
+            throw new \InvalidArgumentException("key cannot be empty");
         }
         unset(self::$context[$key]);
     }

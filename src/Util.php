@@ -17,7 +17,7 @@ class Util
         return false;
     }
 
-    public static function stackDefer(?\SplStack &$context, callable $callback): void
+    public static function scopeDefer(?\SplStack &$context, callable $callback): void
     {
         $context ??= new class() extends \SplStack {
             public function __destruct()

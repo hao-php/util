@@ -1,8 +1,8 @@
 <?php
 
-namespace Haoa\Util\SingleTon;
+namespace Haoa\Util\Singleton;
 
-trait StaticSingleTonTrait
+trait SimpleSingletonTrait
 {
 
     private static $instance;

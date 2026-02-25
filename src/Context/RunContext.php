@@ -2,6 +2,8 @@
 
 namespace Haoa\Util\Context;
 
+use Haoa\Util\Util;
+
 class RunContext
 {
 
@@ -17,6 +19,10 @@ class RunContext
         $cid = self::getCid();
         if (!isset(self::$container[$cid])) {
             self::$container[$cid] = ContextFactory::getContext();
+            // 协程结束时自动清理，防止内存泄漏
+            if (Util::isCoroutine()) {
+                \Swoole\Coroutine\defer(fn() => self::destroy());
+            }
         }
         return self::$container[$cid];
     }

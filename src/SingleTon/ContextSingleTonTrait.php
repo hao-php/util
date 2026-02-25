@@ -1,11 +1,11 @@
 <?php
 
-namespace Haoa\Util\SingleTon;
+namespace Haoa\Util\Singleton;
 
 
 use Haoa\Util\Context\RunContext;
 
-trait ContextSingleTonTrait
+trait ContextSingletonTrait
 {
 
     protected static $keyPre;
@@ -13,7 +13,7 @@ trait ContextSingleTonTrait
     public static function getKeyPre()
     {
         if (empty(self::$keyPre)) {
-            return '_contextSingleTon:';
+            return '_contextSingleton:';
         }
         return self::$keyPre;
     }
@@ -27,7 +27,7 @@ trait ContextSingleTonTrait
     {
         $key = self::getKeyPre() . static::class;
         $obj = RunContext::get($key);
-        if (!empty($obj)) {
+        if ($obj !== null) {
             return $obj;
         }
         $obj = new static();

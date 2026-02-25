@@ -17,7 +17,7 @@ abstract class BaseContext
     public function mustGet($key)
     {
         if (!$this->has($key)) {
-            return new \RuntimeException("key [{$key}] does not exist");
+            throw new \RuntimeException("key [{$key}] does not exist");
         }
         return $this->get($key);
     }
