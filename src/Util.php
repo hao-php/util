@@ -31,4 +31,22 @@ class Util
         $context->push($callback);
     }
 
+    /**
+     * 格式化字节数为易读格式
+     *
+     * @param int $bytes 字节数
+     * @param int $precision 保留小数位数
+     * @return string 格式化后的字符串，如 "1.5MB"
+     */
+    public static function formatBytes(int $bytes, int $precision = 2): string
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $i = 0;
+        while ($bytes > 1024 && $i < count($units) - 1) {
+            $bytes /= 1024;
+            $i++;
+        }
+        return round($bytes, $precision) . $units[$i];
+    }
+
 }
