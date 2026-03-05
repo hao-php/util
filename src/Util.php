@@ -41,8 +41,9 @@ class Util
     public static function formatBytes(int $bytes, int $precision = 2): string
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $maxIndex = count($units) - 1;
         $i = 0;
-        while ($bytes > 1024 && $i < count($units) - 1) {
+        while ($bytes > 1024 && $i < $maxIndex) {
             $bytes /= 1024;
             $i++;
         }
