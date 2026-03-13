@@ -8,16 +8,10 @@ class Util
 
     public static ?LoggerInterface $logger;
 
-    public static bool $enableDebug = true;
 
     public static function setLogger(LoggerInterface $logger): void
     {
         self::$logger = $logger;
-    }
-
-    public static function setEnableDebug(bool $enableDebug): void
-    {
-        self::$enableDebug = $enableDebug;
     }
 
     /**
