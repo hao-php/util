@@ -2,37 +2,31 @@
 
 namespace Haoa\Util\Singleton;
 
-
 use Haoa\Util\Context\RunContext;
 
 trait ContextSingletonTrait
 {
+    private static string $keyPrefix = '_singleton:';
 
-    protected static $keyPre;
-
-    public static function getKeyPre()
+    public static function getKeyPrefix(): string
     {
-        if (empty(self::$keyPre)) {
-            return '_contextSingleton:';
-        }
-        return self::$keyPre;
+        return self::$keyPrefix;
     }
 
-    public static function setKeyPre(string $pre)
+    public static function setKeyPrefix(string $prefix): void
     {
-        self::$keyPre = $pre;
+        self::$keyPrefix = $prefix;
     }
 
     public static function getInstance(): static
     {
-        $key = self::getKeyPre() . static::class;
-        $obj = RunContext::get($key);
-        if ($obj !== null) {
-            return $obj;
+        $key = self::$keyPrefix . static::class;
+        $instance = RunContext::get($key);
+        if ($instance !== null) {
+            return $instance;
         }
-        $obj = new static();
-        RunContext::set($key, $obj);
-        return $obj;
+        $instance = new static();
+        RunContext::set($key, $instance);
+        return $instance;
     }
-
 }

@@ -7,10 +7,19 @@
             "Haoa\\Util\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Haoa\\Util\\Tests\\": "tests/"
+        }
+    },
     "require-dev": {
+        "phpunit/phpunit": "^10.0",
         "swoole/ide-helper": "^6.0"
     },
     "require": {
         "psr/log": "^3.0"
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

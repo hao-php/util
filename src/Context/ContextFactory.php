@@ -4,15 +4,15 @@ namespace Haoa\Util\Context;
 
 use Haoa\Util\Util;
 
+/**
+ * 上下文工厂
+ */
 class ContextFactory
 {
-
-    public static function getContext(): BaseContext
+    public static function create(): ContextInterface
     {
-        if (Util::isCoroutine()) {
-            return new CoContext();
-        }
-        return new ArrContext();
+        return Util::isCoroutine()
+            ? new CoroutineContext()
+            : new ArrayContext();
     }
-
 }
