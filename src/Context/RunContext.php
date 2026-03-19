@@ -3,6 +3,7 @@
 namespace Haoa\Util\Context;
 
 use Haoa\Util\Util;
+use Hyperf\Coroutine\Locker;
 
 /**
  * 上下文门面类
@@ -20,7 +21,20 @@ class RunContext
     {
         if (self::$instance === null) {
             self::$isCoroutine = Util::isCoroutine();
-            self::$instance = ContextFactory::create();
+            if (self::$isCoroutine) {
+                // 协程环境需要加锁保证线程安全
+                $lockKey = __CLASS__ . ':instance';
+                try {
+                    if (Locker::lock($lockKey)) {
+                        self::$instance = ContextFactory::create();
+                    }
+                } finally {
+                    Locker::unlock($lockKey);
+                }
+            } else {
+                // 非协程环境无需加锁
+                self::$instance = ContextFactory::create();
+            }
         }
         return self::$instance;
     }
